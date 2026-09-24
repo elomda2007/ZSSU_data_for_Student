@@ -1,0 +1,164 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f8ff;
+    color:#172033;
+}
+
+a{
+    text-decoration:none;
+}
+
+
+/* Header */
+
+header{
+    background:#0066cc;
+    color:white;
+    text-align:center;
+    padding:50px 20px;
+}
+
+header h1{
+    font-size:40px;
+}
+
+header p{
+    margin-top:8px;
+}
+
+
+/* Main */
+
+main{
+    width:90%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+main>section{
+    background:white;
+    padding:25px;
+    margin-bottom:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px #dbe8f8;
+}
+
+h2{
+    color:#005ac8;
+    margin-bottom:20px;
+}
+
+
+/* Subject Cards */
+
+main>section>a{
+    display:inline-block;
+    width:18%;
+    margin:0.7%;
+    background:white;
+    border:1px solid #dbe8f8;
+    border-radius:12px;
+    overflow:hidden;
+    color:#172033;
+    transition:.3s;
+}
+
+main>section>a:hover{
+    transform:translateY(-7px);
+    border-color:#0066cc;
+}
+
+main>section>a img{
+    width:100%;
+    height:130px;
+    object-fit:cover;
+}
+
+main>section>a h3{
+    text-align:center;
+    padding:12px 5px;
+    color:#005ac8;
+    font-size:16px;
+}
+
+
+/* Back Button */
+
+main> a{
+    display:inline-block;
+    color:#0066cc;
+    background:white;
+    border:2px solid #0066cc;
+    padding:10px 18px;
+    border-radius:10px;
+    margin-bottom:25px;
+}
+
+
+/* PDF */
+
+main>section>a:not(:has(img)){
+    display:block;
+    background:#f4f8ff;
+    color:#005ac8;
+    padding:13px;
+    margin-bottom:10px;
+    border-radius:10px;
+    border:1px solid #dbe8f8;
+}
+
+main>section>a:not(:has(img)):hover{
+    background:#e5f0ff;
+}
+
+
+/* Footer */
+
+footer{
+    background:#003b80;
+    color:white;
+    text-align:center;
+    padding:12px;
+}
+
+footer h5{
+    font-size:13px;
+}
+
+footer p{
+    font-size:11px;
+}
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:30px;
+    }
+
+    main{
+        width:94%;
+    }
+
+    main>section{
+        padding:18px;
+    }
+
+    main>section>a{
+        width:100%;
+        margin:0 0 15px;
+    }
+
+    main>section>a img{
+        height:180px;
+    }
+
+}
