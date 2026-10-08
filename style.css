@@ -1,152 +1,556 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial,sans-serif;
-    background:#f4f8ff;
-    color:#172033;
-}
-
-a{
-    text-decoration:none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Tagesschrift&display=swap');
 
 
-/* Header */
+/* ============================= */
+/* Color Variables               */
+/* ============================= */
 
-header{
-    background:#0066cc;
-    color:white;
-    text-align:center;
-    padding:50px 20px;
-}
-
-header h1{
-    font-size:40px;
-}
-
-header p{
-    margin-top:8px;
-}
-
-
-/* Main */
-
-main{
-    width:90%;
-    max-width:1100px;
-    margin:30px auto;
-}
-
-main>section{
-    background:white;
-    padding:25px;
-    margin-bottom:30px;
-    border-radius:15px;
-    box-shadow:0 5px 15px #dbe8f8;
-}
-
-h2{
-    color:#833976;
-    margin-bottom:20px;
-}
-
-
-/* Subject Cards */
-
-main>section>a{
-    display:inline-block;
-    width:18%;
-    margin:0.7%;
-    background:white;
-    border:1px solid #dbe8f8;
-    border-radius:12px;
-    overflow:hidden;
-    color:#172033;
-    transition:.3s;
-}
-
-main>section>a:hover{
-    transform:translateY(-7px);
-    border-color:#0066cc;
-}
-
-main>section>a img{
-    width:100%;
-    height:130px;
-    object-fit:cover;
-}
-
-main>section>a h3{
-    text-align:center;
-    padding:12px 5px;
-    color:#005ac8;
-    font-size:16px;
-}
-
-
-/* Back Button */
-
-main> a{
-    display:inline-block;
-    color:#0066cc;
-    background:white;
-    border:2px solid #0066cc;
-    padding:10px 18px;
-    border-radius:10px;
-    margin-bottom:25px;
-}
-
-
-/* PDF */
-
-main>section>a:not(:has(img)){
-    display:block;
-    background:#f4f8ff;
-    color:#005ac8;
-    padding:13px;
-    margin-bottom:10px;
-    border-radius:10px;
-    border:1px solid #dbe8f8;
-}
-
-main>section>a:not(:has(img)):hover{
-    background:#e5f0ff;
-}
-
-
-/* Footer */
-
-footer{
-    background:#003b80;
-    color:white;
-    text-align:center;
-    padding:12px;
-}
-
-footer h5{
-    font-size:13px;
-}
-
-footer h4{
-    color:white;
+:root {
+    --topbar-height: 70px;
     
+    /* Main Colors */
+    --bg-color: #cae5f0;
+    --second-bg-color: #ffffff;
+    --card-bg: #ffffff;
+
+    /* Text */
+    --text-color: #172033;
+    --sub-text-color: #197edd;
+    --secondary-text-color: #555;
+
+    /* Brand / Accent */
+    --main-color: #197edd;
+    --heading-color: #833976;
+
+    /* Borders & Shadows */
+    --border-color: #9abae2;
+    --shadow-color: #8ab8d1;
+
+    /* Special Backgrounds */
+    --pdf-bg: #e2e7f0;
+    --pdf-hover: #e5f0ff;
+
+    /* Footer */
+    --footer-bg: #003b80;
+    --footer-border: rgba(255, 255, 255, 0.3);
+
+    /* Signature */
+    --signature-link: #FFD166;
+    --signature-link-hover: #FFE6A3;
 }
 
-footer p{
-    font-size:11px;
+
+/* ============================= */
+/* Dark Mode                    */
+/* ============================= */
+
+html.dark-mode {
+    /* Main Colors */
+    --bg-color: #0c1629;
+    --second-bg-color: #323946;
+    --card-bg: #1e283a;
+
+    /* Text */
+    --text-color: #f1f1f1;
+    --sub-text-color: #1fabec;
+    --secondary-text-color: #c8c8c8;
+
+    /* Brand / Accent */
+    --main-color: #0f72d6;
+    --heading-color: #d66bc4;
+
+    /* Borders & Shadows */
+    --border-color: #4a5363;
+    --shadow-color: rgba(0, 0, 0, 0.35);
+
+    /* Special Backgrounds */
+    --pdf-bg: #272d38;
+    --pdf-hover: #1a1e27;
+
+    /* Footer */
+    --footer-bg: #003b80;
+    --footer-border: rgba(255, 255, 255, 0.3);
+
+    /* Signature */
+    --signature-link: #FFD166;
+    --signature-link-hover: #FFE6A3;
 }
 
 
-/* Mobile */
+/* ============================= */
+/* Reset                         */
+/* ============================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ============================= */
+/* Body                          */
+/* ============================= */
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* ============================= */
+/* Links                         */
+/* ============================= */
+
+a {
+    text-decoration: none;
+}
+
+
+/* ============================= */
+/* Header                        */
+/* ============================= */
+
+header {
+    background: var(--main-color);
+    color: white;
+    text-align: center;
+
+    /* Leave room for the fixed top bar */
+    padding: calc(var(--topbar-height) + 30px) 20px 50px;
+}
+
+header h1 {
+    font-size: 40px;
+}
+
+header p {
+    margin-top: 8px;
+}
+
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    height: var(--topbar-height);
+    padding: 0 clamp(16px, 5vw, 70px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--main-color);
+    box-shadow: none;
+}
+
+.zssulogo {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(30px, 2vw, 22px);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+/* ============================= */
+/* Theme Switch                  */
+/* ============================= */
+
+.switch {
+    position: relative;
+    flex-shrink: 0;
+
+    font-size: 14px;
+    display: inline-block;
+    width: 4em;
+    height: 2.2em;
+
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2a2a2a;
+  transition: 0.4s;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.2em;
+  width: 1.2em;
+  border-radius: 20px;
+  left: 0.5em;
+  bottom: 0.5em;
+  transition: 0.4s;
+  transition-timing-function: cubic-bezier(0.81, -0.04, 0.38, 1.5);
+  box-shadow: inset 8px -4px 0px 0px #fff;
+}
+
+.switch input:checked + .slider {
+  background-color: #00a6ff;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(1.8em);
+  box-shadow: inset 15px -4px 0px 15px #ffcf48;
+}
+
+.star {
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  width: 5px;
+  transition: all 0.4s;
+  height: 5px;
+}
+
+.star_1 {
+  left: 2.5em;
+  top: 0.5em;
+}
+
+.star_2 {
+  left: 2.2em;
+  top: 1.2em;
+}
+
+.star_3 {
+  left: 3em;
+  top: 0.9em;
+}
+
+.switch input:checked ~ .slider .star {
+  opacity: 0;
+}
+
+.cloud {
+  width: 3.5em;
+  position: absolute;
+  bottom: -1.4em;
+  left: -1.1em;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.switch input:checked ~ .slider .cloud {
+  opacity: 1;
+}
+
+
+
+/* ============================= */
+/* Main                          */
+/* ============================= */
+
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+main > section {
+    background: var(--card-bg);
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    text-align: center;
+
+    box-shadow: 0 5px 15px var(--shadow-color);
+
+    transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+main > section h2 {
+    text-align: left;
+}
+
+
+/* ============================= */
+/* Section Titles                */
+/* ============================= */
+
+h2 {
+    color: var(--heading-color);
+    margin-bottom: 20px;
+}
+
+
+/* ============================= */
+/* Subject Cards                 */
+/* ============================= */
+
+main > section > a {
+    display: inline-block;
+    width: 18%;
+    margin: 0.7%;
+
+    background: var(--card-bg);
+    border: 5px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+
+    color: var(--text-color);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background-color 0.3s ease;
+}
+
+main > section > a:hover {
+    transform: translateY(-7px);
+    border-color: var(--main-color);
+}
+
+main > section > a img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+}
+
+main > section > a h3 {
+    text-align: center;
+    padding: 12px 5px;
+
+    color: var(--main-color);
+    font-size: 16px;
+}
+
+
+/* ============================= */
+/* Back Button                   */
+/* ============================= */
+
+main > a {
+    display: inline-block;
+
+    color: var(--sub-text-color);
+    background: var(--card-bg);
+
+    border: 2px solid var(--main-color);
+
+    padding: 10px 18px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+main > a:hover {
+    color: var(--card-bg);
+    background-color: var(--main-color);
+}
+
+main > section > a > h3 {
+    color: var(--sub-text-color);   
+}
+
+/* ============================= */
+/* PDF                           */
+/* ============================= */
+
+main > section > a:not(:has(img)) {
+    display: block;
+
+    background: var(--pdf-bg);
+    color: var(--sub-text-color);
+
+    padding: 13px;
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+main > section > a:not(:has(img)):hover {
+    transform: translateY(-3px);
+    background: var(--pdf-hover);
+    border-color: var(--main-color);
+}
+
+
+/* ============================= */
+/* Footer                        */
+/* ============================= */
+
+footer {
+    background: var(--footer-bg);
+    color: white;
+    text-align: center;
+    padding: 12px;
+}
+
+footer h5 {
+    font-size: 13px;
+}
+
+footer h4 {
+    font-size: 15px;
+    color: white;
+}
+
+
+/* ============================= */
+/* WhatsApp Contacts             */
+/* ============================= */
+
+.whatsapp_contacts {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    column-gap: 70px;
+
+    margin: 18px auto 18px;
+    padding: 12px 30px;
+
+    border-bottom: 3px solid var(--footer-border);
+}
+
+.whatsapp_contacts h4 {
+    margin: 5px;
+}
+
+.whatsapp_box {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 4px;
+}
+
+.whatsapp_img {
+    width: 18px;
+    height: 18px;
+
+    transition: transform 0.3s ease;
+}
+
+.whatsapp_img:hover {
+    transform: scale(1.1);
+}
+
+
+/* ============================= */
+/* Signature                     */
+/* ============================= */
+
+.signature {
+    display: flex;
+    justify-content: center;
+
+    padding: 0.8rem 0;
+
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.signature span {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.signature a {
+    font-family: "Tagesschrift", system-ui;
+
+    color: var(--signature-link);
+    font-size: 20px;
+
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+
+    transition: color 0.2s ease;
+}
+
+.signature a:hover {
+    color: var(--signature-link-hover);
+}
+
+
+
+@media (max-width: 780px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    main {
+        width: 94%;
+    }
+
+    main > section {
+        padding: 18px;
+    }
+
+    main > section > a {
+        width: 100%;
+        margin: 0 0 15px;
+    }
+
+    main > section > a img {
+        height: 180px;
+    }
+}
+
+
+/* ============================= */
+/* Mobile                        */
+/* ============================= */
 
 @media(max-width:600px){
 
     header h1{
         font-size:30px;
+    }
+
+    :root {
+        --topbar-height: 60px;
+    }
+
+    .topbar {
+        padding: 0 16px;
+    }
+
+    .zssulogo {
+        font-size: 20px;
+    }
+
+    .switch {
+        font-size: 10px;
     }
 
     main{
