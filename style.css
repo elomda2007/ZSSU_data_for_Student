@@ -288,9 +288,7 @@ main > section {
         box-shadow 0.3s ease;
 }
 
-main > section h2 {
-    text-align: left;
-}
+
 
 
 /* ============================= */
@@ -376,6 +374,7 @@ main > section > a > h3 {
     color: var(--sub-text-color);   
 }
 
+
 /* ============================= */
 /* PDF                           */
 /* ============================= */
@@ -383,11 +382,15 @@ main > section > a > h3 {
 main > section > a:not(:has(img)) {
     display: block;
 
+    width: 220px;
+    max-width: 100%;
+
     background: var(--pdf-bg);
     color: var(--sub-text-color);
+    text-align: center;
 
     padding: 13px;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
 
     border-radius: 10px;
     border: 1px solid var(--border-color);
@@ -403,6 +406,7 @@ main > section > a:not(:has(img)):hover {
     background: var(--pdf-hover);
     border-color: var(--main-color);
 }
+
 
 
 /* ============================= */
